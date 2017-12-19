@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {# OCLOCK - Affiche champs par champs le formulaire definit AppBundle > Form > UserType #}
+    {{ form_start(form) }} {# OCLOCK - form_start - debut #}
+    {{ form_row(form.username) }}
+    {{ form_row(form.email) }}
+    {{ form_row(form.plainPassword.first) }}
+    {{ form_row(form.plainPassword.second) }}
+
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form) }} {# OCLOCK - form_start - fin #}
+{% endblock %}

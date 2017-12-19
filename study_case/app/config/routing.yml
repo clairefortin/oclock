@@ -1,3 +1,28 @@
+# OCLOCK - Page par defaut
 app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
+    path:     /
+    #methods: [GET,POST]
+    defaults: { _controller: AppBundle:Security:login }
+
+# OCLOCK - Formulaire d'authentification
+
+login:
+    path:     login
+    #methods: [GET,POST]
+    defaults: { _controller: AppBundle:Security:login }
+
+# OCLOCK - Deconnexion utilisateur
+logout:
+    path: /logout
+
+# OCLOCK - Creation d'un nouvel utilisateur
+
+user_registration:
+    path:     register
+    defaults: { _controller: AppBundle:Registration:register }
+
+# OCLOCK - Gestion utilisateur
+owner_profile:
+    path:    owner/profile
+    #methods: POST
+    defaults: { _controller: AppBundle:Owner:profile }

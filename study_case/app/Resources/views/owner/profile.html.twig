@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>
+    Bienvenue {{ nomUtilisateur }} !
+</h1>
+<div id="logout" name="logout">
+    {# OCLOCK - Cf parametre security.yml -> logout #}
+    <a href="{{ path('logout') }}"> D&eacute;connexion</a>
+</div>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <label for="username">Nom d'utilisateur:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+        <label for="password">Mot de passe:</label>
+        <input type="password" id="password" name="_password" />
+        {# OCLOCK - Cf parametre security.yml -> target_path_parameter #}
+        <input type="hidden" name="success" value="owner_profile" />
+        {# OCLOCK - Cf parametre security.yml -> failure_path_parameter #}
+        <input type="hidden" name="failure" value="login" />
+        {# OCLOCK -  Cf parametre security.yml -> csrf_token_generator #}
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button type="submit">login</button>
+    </form>
+    <br />
+    <a href="{{ path('user_registration') }}"> Vous n'avez pas encore de compte ? c'est ici !</a>
+{% endblock %}

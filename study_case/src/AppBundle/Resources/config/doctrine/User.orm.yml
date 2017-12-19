@@ -1,0 +1,24 @@
+# OCLOCK - Definition doctrine du modele de la table "user" dans la base de donnees
+AppBundle\Entity\User:
+    type: entity
+    # OCLOCK - repositoryClass permets d'effectuer les requetes sur l'entite concerné
+    repositoryClass: AppBundle\Repository\UserRepository
+    table: user
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        username:
+            type: string
+            length: 25
+            unique: true
+        password:
+            type: string
+            lenght: 15
+        email:
+            type: string
+            lenght: 25
+            unique: true
+        enabled:
+            type: boolean

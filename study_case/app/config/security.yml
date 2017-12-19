@@ -1,11 +1,18 @@
-# To get started with security, check out the documentation:
 # https://symfony.com/doc/current/security.html
 security:
+    # OCLOCK - Methode d'encryptage des mots de passe pour les utilisateurs
+    encoders:
+        AppBundle\Entity\User:
+            algorithm: bcrypt
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    # OCLOCK - (1) Definit par quel biais on interagit avec les utilisateurs de l'application (DB -> AppBundle/Entity/User)
     providers:
-        in_memory:
-            memory: ~
+        study_case_provider:
+            entity:
+                class: AppBundle:User
+                property: username
+
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
@@ -14,11 +21,41 @@ security:
             security: false
 
         main:
+            pattern: ^/
             anonymous: ~
-            # activate different ways to authenticate
+            http_basic: ~
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
+            # (1) Voir definition providers
+            provider: study_case_provider
 
             # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+            # Example de configuration complete : https://symfony.com/doc/current/reference/configuration/security.html#reference-security-firewall-form-login
+
+            # OCLOCK - Definit le comportement du formulaire de login
+            form_login:
+                # OCLOCK - Route ou se soumet le formulaire
+                check_path: /login
+                # OCLOCK - Route ou est redirige l'utilisateur quand il doit s'authentifie
+                login_path: /login
+                # OCLOCK - Si false redirige sur une autre page que celle du formulaire
+                use_forward: false
+                # OCLOCK - Si login OK - recupere le path custom a partir de l'input "success" du formulaire (cf security/login.html.twig)
+                target_path_parameter: success
+                # OCLOCK - Si login NOK - recupere le path custom a partir de l'input "failure" du formulaire (cf security/login.html.twig)
+                failure_path_parameter: failure
+                # OCLOCK - On impose la methode POST pour le formulaire de login pour plus de securite
+                post_only: true
+                # OCLOCK - Permet de generer un token a mettre dans le formulaire pour eviter les attaques csrf (cf security/login.html.twig)
+                csrf_token_generator: security.csrf.token_manager
+
+            # OCLOCK - Route de deconnexion de l'utilisateur
+            logout:
+                path:   /logout
+                target: /
+
+    # OCLOCK - Definit les roles que l'utilisateur doit avoir pour acceder a ces pages
+    access_control:
+         # OCLOCK - nous n'avons pas a etre authentifie pour acceder au formulaire de login
+         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+         # OCLOCK - en revanche nous devons etre authentifie en tant qu'utilisateur pour acceder aux pages owner
+         - { path: ^/owner, roles: ROLE_USER }

@@ -11,6 +11,7 @@ parameters:
 framework:
     #esi: ~
     #translator: { fallbacks: ['%locale%'] }
+    csrf_protection: ~
     secret: '%secret%'
     router:
         resource: '%kernel.project_dir%/app/config/routing.yml'
@@ -37,6 +38,7 @@ twig:
     strict_variables: '%kernel.debug%'
 
 # Doctrine Configuration
+# OCLOCK - %ma_variable% --> les variables globales symfony sont presentes dans parameters.yml
 doctrine:
     dbal:
         driver: pdo_mysql
