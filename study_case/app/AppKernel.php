@@ -8,6 +8,8 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
+        // OCLOCK - Chaque nouvelle extension (bundle) doit etre declare ici et selon le besoin de l'environnement (prod, dev, test)
+
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
             new Symfony\Bundle\SecurityBundle\SecurityBundle(),
@@ -26,6 +28,8 @@ class AppKernel extends Kernel
 
             if ('dev' === $this->getEnvironment()) {
                 $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+                $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
+                $bundles[] = new EightPoints\Bundle\GuzzleBundle\GuzzleBundle();
                 //$bundles[] = new Symfony\Bundle\WebServerBundle\WebServerBundle();
             }
         }

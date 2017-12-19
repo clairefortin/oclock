@@ -5,7 +5,7 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <form action="{{ path('login') }}" method="post">
+    <form id="loginForm" name="loginForm" action="{{ path('login') }}" method="post">
         <label for="username">Nom d'utilisateur:</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
 
@@ -17,7 +17,7 @@
         <input type="hidden" name="failure" value="login" />
         {# OCLOCK -  Cf parametre security.yml -> csrf_token_generator #}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button type="submit">login</button>
+        <button name="login" id="login" type="submit">Login</button>
     </form>
     <br />
     <a href="{{ path('user_registration') }}"> Vous n'avez pas encore de compte ? c'est ici !</a>
