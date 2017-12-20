@@ -1,11 +1,52 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>
-    Bienvenue {{ nomUtilisateur }} !
-</h1>
-<div id="logout" name="logout">
-    {# OCLOCK - Cf parametre security.yml -> logout #}
-    <a href="{{ path('logout') }}"> D&eacute;connexion</a>
+    <h1>
+        Bienvenue {{ nomUtilisateur }} !
+    </h1>
+
+    <div id="logout" name="logout">
+        {# OCLOCK - Cf parametre security.yml -> logout #}
+        <a href="{{ path('logout') }}"> D&eacute;connexion</a>
+    </div>
+
+    <div id="addPet" name="addPet">
+        <a href="{{ path('owner_add_pet') }}"> Ajouter votre animal</a>
+    </div>
+
+    <div id="petList" name="petList">
+        {# OCLOCK - Test si l'utilisateur courant a au moins un animal dans son arrayCollection #}
+        {% if listeAnimaux|length > 0 %}
+            <table>
+                <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Type</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                {# OCLOCK - On affiche tout les animaux de la liste #}
+                {% for animal in listeAnimaux %}
+                <tr>
+                    <td>{{ animal.nickname|e }}</td>
+                    <td>{{ animal.type|e }}</td>
+                    <td>{{ animal.age|e }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+    <div id="petStat" name="petStat">
+        <table>
+            <thead>
+            <tr>
+                <th>Age moyen animaux</th>
+                <th>Nombre d'animaux moyen par utilisateur</th>
+            </tr>
+            </thead>
+            <tbody>
+    </div>
 </div>
 {% endblock %}

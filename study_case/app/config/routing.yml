@@ -1,14 +1,12 @@
 # OCLOCK - Page par defaut
 app:
     path:     /
-    #methods: [GET,POST]
     defaults: { _controller: AppBundle:Security:login }
 
 # OCLOCK - Formulaire d'authentification
 
 login:
     path:     login
-    #methods: [GET,POST]
     defaults: { _controller: AppBundle:Security:login }
 
 # OCLOCK - Deconnexion utilisateur
@@ -24,5 +22,8 @@ user_registration:
 # OCLOCK - Gestion utilisateur
 owner_profile:
     path:    owner/profile
-    #methods: POST
     defaults: { _controller: AppBundle:Owner:profile }
+
+owner_add_pet:
+    path:    owner/add_pet
+    defaults: { _controller: AppBundle:Owner:addPet }

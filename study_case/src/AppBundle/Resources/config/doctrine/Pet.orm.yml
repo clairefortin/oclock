@@ -1,0 +1,20 @@
+# OCLOCK - Definition doctrine du modele de la table "pet" dans la base de donnees
+AppBundle\Entity\Pet:
+    type: entity
+    # OCLOCK - repositoryClass permets d'effectuer les requetes sur l'entite concerné
+    repositoryClass: AppBundle\Repository\PetRepository
+    table: pet
+    id:
+        id:
+            type: integer
+            generator: { strategy: AUTO }
+    fields:
+        nickname:
+            type: string
+            length: 20
+        type:
+            type: string
+            lenght: 15
+        age:
+            type: integer
+

@@ -1,13 +1,12 @@
 <?php
 namespace AppBundle\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 //OCLOCK - Definition de l'objet entite qui va servir d'interface avec la table "User" de la base de donnees
 
-class User implements UserInterface, \Serializable
-{
+class User implements UserInterface, \Serializable {
     private $id;
 
     private $username;
@@ -20,12 +19,15 @@ class User implements UserInterface, \Serializable
 
     private $enabled;
 
+    private $pets;
+
     /**
      * User constructor.
      */
     public function __construct()
     {
         $this->enabled= true;
+        $this->pets = new ArrayCollection();
     }
 
     /**
@@ -153,9 +155,7 @@ class User implements UserInterface, \Serializable
         return serialize(array(
             $this->id,
             $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt,
+            $this->password
         ));
     }
 
@@ -165,9 +165,34 @@ class User implements UserInterface, \Serializable
         list (
             $this->id,
             $this->username,
-            $this->password,
-            // see section on salt below
-            // $this->salt
+            $this->password
             ) = unserialize($serialized);
     }
+
+    /**
+     * @return ArrayCollection of Pet
+     */
+    public function addPet(Pet $pet)
+    {
+        $this->pets[] = $pet;
+
+        return $this;
+    }
+
+    /**
+     * @param Pet $pet
+     */
+    public function removePet(Pet $pet)
+    {
+        $this->pets->removeElement($pet);
+    }
+
+    /**
+     * @return ArrayCollection of Pet
+     */
+    public function getPets()
+    {
+        return $this->pets;
+    }
+
 }

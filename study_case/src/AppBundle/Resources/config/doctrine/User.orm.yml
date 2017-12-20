@@ -1,6 +1,19 @@
 # OCLOCK - Definition doctrine du modele de la table "user" dans la base de donnees
 AppBundle\Entity\User:
     type: entity
+    manyToMany:
+        pets:
+            targetEntity: Pet
+            cascade: ["persist"]
+            joinTable:
+                name: users_pets
+                joinColumns:
+                    user_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    pet_id:
+                        referencedColumnName: id
+                        unique: true
     # OCLOCK - repositoryClass permets d'effectuer les requetes sur l'entite concerné
     repositoryClass: AppBundle\Repository\UserRepository
     table: user

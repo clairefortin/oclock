@@ -5,33 +5,30 @@ use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends Controller
 {
     public function registerAction(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
-        // 1) build the form
+        // OCLOCK - Contruction du formulaire
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on POST)
+        // OCLOCK - Recupere le formulaire soumis
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
+            // OCLOCK - Encode le mot de passe (cd security.yml encoder)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // 4) save the User!
+            // OCLOCK - Enregistre l'utilisateur
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
+            // OCLOCK - Redirige vers la route owner_profile
             return $this->redirectToRoute('owner_profile');
         }
 

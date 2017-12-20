@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2>
+    Ajouter votre animal !
+</h2>
+<div id="logout" name="logout">
+    {# OCLOCK - Affiche champs par champs le formulaire definit AppBundle > Form > PetType #}
+    {{ form_start(form) }} {# OCLOCK - form_start - debut #}
+    {{ form_row(form.nickname) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.age) }}
+
+    <button type="submit">Enregistrer</button>
+    {{ form_end(form) }} {# OCLOCK - form_start - fin #}
+</div>
+{% endblock %}
