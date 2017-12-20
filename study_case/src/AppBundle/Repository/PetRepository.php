@@ -5,21 +5,14 @@ use Doctrine\ORM\EntityRepository;
 
 class PetRepository extends EntityRepository
 {
-
-    public function findAllPublishedOrderedBySize()
-    {
-        return $this->createQueryBuilder('pet');
-    }
-
     // OCLOCK - On recupere l'age moyen de l'ensemble des animaux des proprietaires
    public function getAverageAgePets(){
-        return $this->getEntityManager()
-            ->createQueryBuilder('p')
-            ->select("avg(p.age)")
-            ->from('pet', 'p')
-            ->getQuery() // on execute la requete
-            ->getOneOrNullResult();
+        $queryBuilder = $this->createQueryBuilder('p');
+
+        $result = $queryBuilder->select("AVG(p.age) as moyenne_age")
+                               ->getQuery() // on execute la requete
+                               ->getSingleScalarResult(); // OCLOCK - getSingleScalarResult : On souhaite retourner un seul resulat issus d'un calcul (avg,count,...)
+
+        return  $result;
     }
-
-
 }

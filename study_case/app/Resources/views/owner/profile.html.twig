@@ -31,7 +31,7 @@
                 <tr>
                     <td>{{ animal.nickname|e }}</td>
                     <td>{{ animal.type|e }}</td>
-                    <td>{{ animal.age|e }}</td>
+                    <td>{{ animal.age }}</td>
                 </tr>
                 {% endfor %}
                 </tbody>
@@ -39,14 +39,7 @@
         {% endif %}
     </div>
     <div id="petStat" name="petStat">
-        <table>
-            <thead>
-            <tr>
-                <th>Age moyen animaux</th>
-                <th>Nombre d'animaux moyen par utilisateur</th>
-            </tr>
-            </thead>
-            <tbody>
+        <p>Age moyen animaux : {{ ageMoyen|number_format(2) }}</p>
     </div>
 </div>
 {% endblock %}

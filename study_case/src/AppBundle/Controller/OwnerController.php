@@ -16,14 +16,20 @@ class OwnerController extends Controller
 
         // OCLOCK - on recupere les animaux de mon user courant
         $petList = $this->getUser()->getPets();
-        
+
+        // OCLOCK - on l'entity manager qui permet de recuperer aussi les repository
+        $em = $this->getDoctrine()->getManager();
+
+        //OCLOCK - On la valeur de getAverageAgePets() (Cf PetRepository) via l'entity manager
+        $averageAge = $em->getRepository("AppBundle:Pet")->getAverageAgePets();
 
         // OCLOCK - on envoit les parametres a afficher dans ma vue
         return $this->render(
             'owner/profile.html.twig',
             array(
                 'nomUtilisateur' => $userName,
-                'listeAnimaux' => $petList
+                'listeAnimaux' => $petList,
+                'ageMoyen' => $averageAge
             )
         );
     }
