@@ -3,7 +3,21 @@
     <head>
         <meta charset="UTF-8" />
         <title>{% block title %}StudyCase{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {#
+                OCLOCK - Dans cet example on inclut de facon simple les feuilles de style.
+                         Pour une gestion un peu plus avancee : https://symfony.com/doc/3.4/frontend/assetic/asset_management.html
+                         La configuration d'assetic a deja ete mise en place dans config.yml
+
+                         Pour installer les assets
+                         - Creer un repertoire "public" ici AppBundle/Resources/public/css
+                         - Mettre son css
+                         - lancer la commande php bin/console assets:install --symlink (--relative pour les lien relatif souhaite)
+                         - Les fichiers seront presents dans web/bundles/app/css
+            #}
+            <link href="{{ asset('bundles/app/css/bootstrap.min.css') }}" rel="stylesheet" />
+            <link href="{{ asset('bundles/app/css/appbundle.css') }}" rel="stylesheet" />
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>

@@ -8,7 +8,7 @@ class AppKernel extends Kernel
 {
     public function registerBundles()
     {
-        // OCLOCK - Chaque nouvelle extension (bundle) doit etre declare ici et selon le besoin de l'environnement (prod, dev, test)
+        // OCLOCK - /!\ IMPORTANT - Chaque nouvelle extension (bundle) doit etre declare ici et selon le besoin de l'environnement (prod, dev, test)
 
         $bundles = [
             new Symfony\Bundle\FrameworkBundle\FrameworkBundle(),
@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\SwiftmailerBundle\SwiftmailerBundle(),
             new Doctrine\Bundle\DoctrineBundle\DoctrineBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
+            new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new AppBundle\AppBundle(),
         ];
 

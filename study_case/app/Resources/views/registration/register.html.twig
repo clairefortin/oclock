@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
-
+{# OCLOCK - Wrapping formulaire sur le format bootstrap 4 (cf config.yml > twig > form #}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     {# OCLOCK - Affiche champs par champs le formulaire definit AppBundle > Form > UserType #}
     {{ form_start(form) }} {# OCLOCK - form_start - debut #}
@@ -11,6 +12,6 @@
         {# OCLOCK -  Cf parametre security.yml -> csrf_token_generator #}
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 
-        <button type="submit" id="register_user" name="register_user">Enregistrer</button>
+        <button type="submit" id="register_user" name="register_user" class="btn btn-primary">Enregistrer</button>
     {{ form_end(form) }} {# OCLOCK - form_start - fin #}
 {% endblock %}

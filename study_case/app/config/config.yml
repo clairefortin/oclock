@@ -31,11 +31,23 @@ framework:
     assets: ~
     php_errors:
         log: true
+    # OCLOCK - (1) Patch - Section necessaire pour le fonctionnement d'assetic
+    templating:
+        engines: ['twig']
 
 # Twig Configuration
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes: ['bootstrap_4_layout.html.twig']
+
+# OCLOCK - Installation du gestionnaire des assets (css/js) pour les action de combination ou de mnification
+# /!\ Ne pas oublier la partie (1) - Detail du probleme https://github.com/symfony/recipes-contrib/issues/84
+assetic:
+    debug:          '%kernel.debug%'
+    use_controller: '%kernel.debug%'
+    filters:
+        cssrewrite: ~
 
 # Doctrine Configuration
 # OCLOCK - %ma_variable% --> les variables globales symfony sont presentes dans parameters.yml
